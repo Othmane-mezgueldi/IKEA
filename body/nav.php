@@ -42,6 +42,10 @@ $page = $page ?? '';
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link <?= in_array($page, ['categories']) ? 'active text-info fw-bold' : ''  ?>" href="produits.php">Produits</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link <?= in_array($page, ['categories']) ? 'active text-info fw-bold' : ''  ?>" href="categories.php">Categories</a>
                 </li>
 
