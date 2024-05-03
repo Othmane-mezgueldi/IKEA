@@ -53,6 +53,10 @@ $page = $page ?? '';
                     <a class="nav-link <?= $page == 'couleurs' ? 'active text-info fw-bold' : '' ?>" href="couleurs.php">Couleurs</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link <?= $page == 'commande' ? 'active text-info fw-bold' : '' ?>" href="commandes.php">Commandes</a>
+                </li>
+
             </ul>
 
         </div>
