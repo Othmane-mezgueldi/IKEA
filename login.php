@@ -29,8 +29,11 @@ $couleurs = $db->query("SELECT * FROM couleurs ORDER BY id DESC")->fetchAll();
         <!-- place navbar here -->
         <?php include_once "body/nav.php"; ?>
     </header>
-    <main class="container">
-        <div class="row justify-content-md-center mt-3">
+    <main class="container mt-3">
+
+        <?php include_once "body/message_flash.php"; ?>
+
+        <div class="row justify-content-md-center">
             <div class="col-8">
 
                 <div class="bg-light p-5 rounded-pilla rounded-3">
