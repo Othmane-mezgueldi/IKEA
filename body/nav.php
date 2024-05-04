@@ -6,7 +6,7 @@
 
 $page = $page ?? '';
 ?>
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">IKEA</a>
         <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +19,7 @@ $page = $page ?? '';
                     <a class="nav-link <?php
 
                                         if ($page == 'home') {
-                                            echo "active text-info fw-bold";
+                                            echo "active text-warninga fw-bold";
                                         } else {
                                             echo '';
                                         }
@@ -27,36 +27,46 @@ $page = $page ?? '';
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'shop' ? 'active text-info fw-bold' : '' ?>" href="shop.php">Shop</a>
+                    <a class="nav-link <?= $page == 'shop' ? 'active text-warninga fw-bold' : '' ?>" href="shop.php">Shop</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link 
-                    <?php // ($page == 'cart' or $page == 'proceed-checkout' or $page == 'thank-you') ? 'active text-info fw-bold' : '' 
+                    <?php // ($page == 'cart' or $page == 'proceed-checkout' or $page == 'thank-you') ? 'active text-warninga fw-bold' : '' 
                     ?>
-<?= in_array($page, ['cart', 'proceed-checkout', 'thank-you']) ? 'active text-info fw-bold' : ''  ?>" href="cart.php">Cart</a>
+<?= in_array($page, ['cart', 'proceed-checkout', 'thank-you']) ? 'active text-warninga fw-bold' : ''  ?>" href="cart.php">Cart</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'contact' ? 'active text-info fw-bold' : '' ?>" href="contact.php">Contact</a>
+                    <a class="nav-link <?= $page == 'contact' ? 'active text-warninga fw-bold' : '' ?>" href="contact.php">Contact</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link <?= in_array($page, ['categories']) ? 'active text-info fw-bold' : ''  ?>" href="produits.php">Produits</a>
+                    <a class="nav-link <?= in_array($page, ['produits']) ? 'active text-warninga fw-bold' : ''  ?>" href="produits.php">Produits</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link <?= in_array($page, ['categories']) ? 'active text-info fw-bold' : ''  ?>" href="categories.php">Categories</a>
+                    <a class="nav-link <?= in_array($page, ['categories']) ? 'active text-warninga fw-bold' : ''  ?>" href="categories.php">Categories</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'couleurs' ? 'active text-info fw-bold' : '' ?>" href="couleurs.php">Couleurs</a>
+                    <a class="nav-link <?= $page == 'couleurs' ? 'active text-warninga fw-bold' : '' ?>" href="couleurs.php">Couleurs</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'commande' ? 'active text-info fw-bold' : '' ?>" href="commandes.php">Commandes</a>
+                    <a class="nav-link <?= $page == 'commande' ? 'active text-warninga fw-bold' : '' ?>" href="commandes.php">Commandes</a>
                 </li>
 
+            </ul>
+
+            <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <a class="nav-link active <?= $page == 'login' ? ' text-warninga fw-bold' : '' ?>" href="login.php">Login</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active <?= $page == 'register' ? ' text-warninga fw-bold' : '' ?>" href="register.php">Register</a>
+                </li>
             </ul>
 
         </div>
