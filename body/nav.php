@@ -60,13 +60,24 @@ $page = $page ?? '';
             </ul>
 
             <ul class="navbar-nav ">
-                <li class="nav-item">
-                    <a class="nav-link active <?= $page == 'login' ? ' text-warninga fw-bold' : '' ?>" href="login.php">Login</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link active <?= $page == 'register' ? ' text-warninga fw-bold' : '' ?>" href="register.php">Register</a>
-                </li>
+                <?php if (!isset($_SESSION['ikea_auth'])) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link active <?= $page == 'login' ? ' text-warninga fw-bold' : '' ?>" href="login.php">Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active <?= $page == 'register' ? ' text-warninga fw-bold' : '' ?>" href="register.php">Register</a>
+                    </li>
+
+                <?php else : ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="logout.php">Logout</a>
+                    </li>
+                <?php endif ?>
+
+
             </ul>
 
         </div>

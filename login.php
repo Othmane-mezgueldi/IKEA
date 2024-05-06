@@ -1,14 +1,78 @@
 <?php
 
-$page = "couleurs";
-
 
 require "database/database.php";
 require "helpers/functions.php";
-$couleurs = $db->query("SELECT * FROM couleurs ORDER BY id DESC")->fetchAll();
+$page = "login";
+
+if (isset($_SESSION['ikea_auth'])) {
+    $_SESSION['message'] = "Vous etes déja connecter";
+    $_SESSION['couleur'] = "danger";
+    header('Location:dashboard.php');
+    exit;
+}
+
+// password_verify($password, $password_hash);
+
+// $email = "ikram@gmail.com";
+// $password = 123456;
+// 123456
+// $password_hash = '$2y$10$xH07UpjDFhAMecKsQvwC8uvAmSN6wpa82ech/f8yWoloW8HsjWmlm';
+
+// $password_verify = password_verify($password, $password_hash);
 
 // echo "<pre>";
-// print_r($produits);
+// var_dump($password_verify);
+// echo "</pre>";
+// exit;
+
+// https: //www.w3schools.com/sql/sql_injection.asp
+
+// ' or '1'='1
+// ' or ''='
+
+
+if (isset($_POST['login_btn'])) {
+
+    $email = e($_POST['email']);
+    $password = e($_POST['password']);
+
+    // Email verify
+    $user_row = $db->query("SELECT * FROM users 
+    WHERE email = '$email'")->rowCount();
+
+    if ($user_row == 0) {
+        $_SESSION['message'] = "Email ou mot de passe incorrecte";
+        $_SESSION['couleur'] = "danger";
+        header('Location:login.php');
+        exit;
+    }
+    // Password verify
+    $user_info = $db->query("SELECT * FROM users 
+    WHERE email = '$email' LIMIT 1")->fetch();
+
+    $password_hash = $user_info['password'];
+
+    $password_verify = password_verify($password, $password_hash);
+
+    if ($password_verify === false) {
+        $_SESSION['message'] = "Email ou mot de passe incorrecte";
+        $_SESSION['couleur'] = "danger";
+        header('Location:login.php');
+        exit;
+    }
+
+    $_SESSION['ikea_auth'] = $user_info;
+
+    $_SESSION['message'] = "Bien connecter";
+    $_SESSION['couleur'] = "success";
+    header('Location:dashboard.php');
+    exit;
+}
+
+
+// echo "<pre>";
+// print_r($_POST);
 // echo "</pre>";
 // exit;
 ?>
@@ -17,7 +81,7 @@ $couleurs = $db->query("SELECT * FROM couleurs ORDER BY id DESC")->fetchAll();
 <html lang="en">
 
 <head>
-    <title>Liste des couleurs</title>
+    <title>Login</title>
     <!-- Required meta tags -->
 
     <?php include_once "body/head.php"; ?>
@@ -60,24 +124,21 @@ $couleurs = $db->query("SELECT * FROM couleurs ORDER BY id DESC")->fetchAll();
 
                             <input name="email" type="email" class="form-control " id="email" placeholder="Veuillez saisir votre adresse mail SVP !" value="">
 
-                            <div class=" fw-bold">
-                            </div>
+
                         </div>
 
 
                         <div class="form-group mb-3">
                             <label class="form-label" for="password">Mot de passe:</label>
 
-                            <input name="password" type="password" class="form-control " id="password" name="password" placeholder="Veuillez saisir votre Mot de passe SVP !">
+                            <input name="password" type="password" class="form-control " id="password" placeholder="Veuillez saisir votre mot de passe SVP !">
 
-                            <div class=" fw-bold">
-                            </div>
                         </div>
 
 
                         <div class="d-flex mb-3">
                             <div class="me-auto p-2">
-                                <button class="btn btn-dark" name="login">
+                                <button class="btn btn-dark" type="submit" name="login_btn">
                                     Connexion
                                 </button>
                             </div>

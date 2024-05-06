@@ -3,6 +3,15 @@
 require "database/database.php";
 require "helpers/functions.php";
 
+$page = "register";
+
+if (isset($_SESSION['ikea_auth'])) {
+    $_SESSION['message'] = "Vous etes déja connecter";
+    $_SESSION['couleur'] = "danger";
+    header('Location:dashboard.php');
+    exit;
+}
+
 $errors = [];
 if (isset($_POST['register_btn'])) {
 
