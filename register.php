@@ -5,12 +5,7 @@ require "helpers/functions.php";
 
 $page = "register";
 
-if (isset($_SESSION['ikea_auth'])) {
-    $_SESSION['message'] = "Vous etes déja connecter";
-    $_SESSION['couleur'] = "danger";
-    header('Location:dashboard.php');
-    exit;
-}
+_check_if_user_deconnected();
 
 $errors = [];
 if (isset($_POST['register_btn'])) {

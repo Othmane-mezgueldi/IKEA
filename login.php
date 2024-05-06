@@ -5,12 +5,8 @@ require "database/database.php";
 require "helpers/functions.php";
 $page = "login";
 
-if (isset($_SESSION['ikea_auth'])) {
-    $_SESSION['message'] = "Vous etes déja connecter";
-    $_SESSION['couleur'] = "danger";
-    header('Location:dashboard.php');
-    exit;
-}
+_check_if_user_deconnected();
+
 
 // password_verify($password, $password_hash);
 

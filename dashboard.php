@@ -3,13 +3,7 @@
 require "database/database.php";
 require "helpers/functions.php";
 $page = "dashboard";
-
-if (!isset($_SESSION['ikea_auth'])) {
-    $_SESSION['message'] = "Vous n'etes pas autorisé a consulter cette page !!!";
-    $_SESSION['couleur'] = "danger";
-    header('Location:login.php');
-    exit;
-}
+_check_if_user_connected();
 
 ?>
 

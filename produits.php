@@ -4,6 +4,10 @@ $page = "produits";
 
 require "database/database.php";
 require "helpers/functions.php";
+
+_check_if_user_connected();
+
+
 $produits = $db->query("SELECT * FROM produits")->fetchAll();
 $categories = $db->query("SELECT * FROM categories")->fetchAll();
 $couleurs = $db->query("SELECT * FROM couleurs")->fetchAll();
