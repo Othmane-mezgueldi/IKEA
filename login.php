@@ -35,7 +35,7 @@ if (isset($_POST['login_btn'])) {
 
     // Email verify
     $user_row = $db->query("SELECT * FROM users 
-    WHERE email = '$email'")->rowCount();
+    WHERE email = '$email' AND deleted_at IS NULL")->rowCount();
 
     if ($user_row == 0) {
         $_SESSION['message'] = "Email ou mot de passe incorrecte";

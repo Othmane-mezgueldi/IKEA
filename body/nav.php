@@ -45,6 +45,10 @@ $page = $page ?? '';
                 <?php else : ?>
 
                     <li class="nav-item">
+                        <a class="nav-link <?= $page == 'users' ? 'active text-warninga fw-bold' : '' ?>" href="users.php">Utilisateurs</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link <?= in_array($page, ['produits']) ? 'active text-warninga fw-bold' : ''  ?>" href="produits.php">Produits</a>
                     </li>
 

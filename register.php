@@ -170,7 +170,7 @@ if (isset($_POST['register_btn'])) {
 <html lang="en">
 
 <head>
-    <title>Liste des couleurs</title>
+    <title>Register</title>
     <!-- Required meta tags -->
 
     <?php include_once "body/head.php"; ?>

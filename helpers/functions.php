@@ -8,7 +8,6 @@ function e($value)
 
 
 
-
 // $a = 5;
 // $b = 2;
 
@@ -75,4 +74,12 @@ function user()
         return $_SESSION['ikea_auth'];
     }
     return _check_if_user_connected();
+}
+
+function dd($value)
+{
+    echo "<pre>";
+    print_r($value);
+    echo "</pre>";
+    exit;
 }
