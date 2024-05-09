@@ -1,5 +1,6 @@
 <?php
-
+require "database/database.php";
+require "helpers/functions.php";
 $page = "home";
 ?>
 <!doctype html>

@@ -7,6 +7,11 @@ $page = "users";
 
 _check_if_user_connected();
 
+$status = "enable";
+if (isset($_GET['status'])) {
+    $status = e($_GET['status']);
+}
+
 if (isset($_POST['btn_add_user'])) {
     $nom = e($_POST['nom']);
     $email = e($_POST['email']);
@@ -91,11 +96,15 @@ if (isset($_POST['btn_enable_user'])) {
 }
 
 
+// if ($status == "enable") {
+//     $users = $db->query("SELECT * FROM users WHERE deleted_at IS NULL ORDER BY id DESC")->fetchAll();
+// } else {
+//     $users = $db->query("SELECT * FROM users WHERE deleted_at IS NOT NULL ORDER BY id DESC")->fetchAll();
+// }
 
+$req_not = $status == "enable" ? "" : " NOT ";
 
-
-$users = $db->query("SELECT * FROM users ORDER BY id DESC")->fetchAll();
-
+$users = $db->query("SELECT * FROM users WHERE deleted_at IS $req_not NULL ORDER BY id DESC")->fetchAll();
 
 // echo "<pre>";
 // print_r($produits);
@@ -203,7 +212,17 @@ $users = $db->query("SELECT * FROM users ORDER BY id DESC")->fetchAll();
                     </div>
                     <!-- modal-dialog -->
                 </div>
-                <!-- Modal -->
+
+                <?php if ($status == "enable") :  ?>
+                    <a href="users.php?status=disable" class="btn btn-secondary mb-3">
+                        Archive
+                    </a>
+                <?php else :  ?>
+                    <a href="users.php" class="btn btn-success mb-3">
+                        Active
+                    </a>
+                <?php endif  ?>
+
 
                 <div class="table-responsive">
                     <table class="table table-bordered">
