@@ -61,10 +61,9 @@ $p = $db->query("SELECT * FROM produits WHERE id = $id LIMIT 1")->fetch();
             </nav>
 
 
-
             <div class="row">
                 <div class="col">
-                    <img src="images/<?= $p['image'] ?>" class="img-fluid" alt="">
+                    <img src="images/produits/<?= $p['image'] ?>" class="img-fluid" alt="">
                 </div>
                 <!-- col -->
 

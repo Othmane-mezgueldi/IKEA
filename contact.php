@@ -1,5 +1,7 @@
 <?php
 
+require "database/database.php";
+require "helpers/functions.php";
 $page = "contact";
 ?>
 <!doctype html>
