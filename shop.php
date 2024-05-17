@@ -15,8 +15,8 @@ $page = "shop";
 
 $req_search = isset($_GET['search']) ? " nom LIKE '%" . e($_GET['search']) . "%' AND " : '';
 
-$categorie_filter_req = $couleur_filter_req = '';
-if (isset($_GET['filters'])) {
+$req_search  = $categorie_filter_req = $couleur_filter_req = '';
+if (isset($_GET['btn_filters'])) {
     if (!empty($_GET['categorie_filter'])) {
         $categorie_filter_req = "categorie_id = " . (int)$_GET['categorie_filter'] . " AND";
     }
@@ -25,9 +25,12 @@ if (isset($_GET['filters'])) {
         $list_couleur_ids_filter = implode(', ', array_map('intval', $_GET['couleur_filter']));
         $couleur_filter_req = "couleur_id IN($list_couleur_ids_filter) AND";
     }
+
+    $req_search = isset($_GET['search']) ? " nom LIKE '%" . e($_GET['search']) . "%' AND " : '';
 }
 
-$produits = $db->query("SELECT * FROM produits WHERE $req_search $categorie_filter_req $couleur_filter_req deleted_at IS NULL")->fetchAll();
+$produits = $db->query("SELECT * FROM produits WHERE $req_search $categorie_filter_req $couleur_filter_req deleted_at IS NULL ORDER BY RAND()")->fetchAll();
+
 
 $categories = $db->query("SELECT c.id AS categorie_id, c.nom AS categorie_nom, c.icon, COALESCE(SUM(p.quantite), 0) AS total_produit_par_categorie FROM produits p RIGHT JOIN categories c ON c.id = p.categorie_id WHERE c.deleted_at IS NULL GROUP BY c.id")->fetchAll();
 
@@ -40,7 +43,6 @@ $couleurs = $db->query("SELECT c.id AS couleur_id, c.nom AS couleur_nom, COALESC
 <head>
     <title>Shop</title>
     <?php include_once "body/head.php"; ?>
-    <?php include_once "body/script.php"; ?>
 </head>
 
 <body>
@@ -60,6 +62,15 @@ $couleurs = $db->query("SELECT c.id AS couleur_id, c.nom AS couleur_nom, COALESC
             <div class="row mb-5">
                 <div class="col-md-3">
                     <form method="get">
+
+                        <div class="input-group mb-3">
+                            <input type="search" class="form-control" name="search" placeholder="Rechercher" value="<?= $_GET['search'] ?? '' ?>">
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+
+
                         <h5>Catégories</h5>
                         <ul class="list-group list-group-flush mb-3">
                             <?php foreach ($categories as $value) : ?>
@@ -88,27 +99,23 @@ $couleurs = $db->query("SELECT c.id AS couleur_id, c.nom AS couleur_nom, COALESC
                             <?php endforeach ?>
                         </ul>
 
-                        <button type="submit" name="filters" class="btn btn-dark fw-bold">
+                        <button type="submit" name="btn_filters" class="btn btn-dark fw-bold">
                             <i class="bi bi-filter"></i>
                             Filters
                         </button>
+
+                        <a href="shop.php" class="btn btn-secondary fw-bold">
+                            <i class="bi bi-clear"></i>
+                            Clear
+                        </a>
                     </form>
                 </div>
 
                 <div class="col-md-9">
-                    <form method="get">
-                        <div class="input-group mb-3">
-                            <input type="search" class="form-control" name="search" placeholder="Rechercher" value="<?= $_GET['search'] ?? '' ?>">
-                            <button class="btn btn-outline-secondary" type="submit">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                    </form>
-
                     <div class="row gy-2 row-cols-1 row-cols-md-3 row-cols-sm-2">
                         <?php foreach ($produits as $value) : ?>
                             <div class="col">
-                                <div class="card">
+                                <div class="card" data-aos="fade-up">
                                     <a href="product-page.php?id=<?= $value['id'] ?>">
                                         <img src="images/produits/<?= $value['image'] ?>" loading="lazy" class="card-img-top" alt="...">
                                     </a>
@@ -133,6 +140,9 @@ $couleurs = $db->query("SELECT c.id AS couleur_id, c.nom AS couleur_nom, COALESC
     <footer>
         <!-- place footer here -->
     </footer>
+
+    <?php include_once "body/script.php"; ?>
+
 </body>
 
 </html>

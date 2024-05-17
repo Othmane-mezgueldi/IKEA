@@ -1,10 +1,7 @@
 <?php
 require "database/database.php";
 require "helpers/functions.php";
-// echo "<pre>";
-// print_r($_GET['id']);
-// echo "</pre>";
-// exit;
+$page = "product-page";
 
 $id = $_GET['id'];
 
@@ -36,7 +33,6 @@ $p = $db->query("SELECT * FROM produits WHERE id = $id LIMIT 1")->fetch();
     <!-- Required meta tags -->
 
     <?php include_once "body/head.php"; ?>
-    <?php include_once "body/script.php"; ?>
 </head>
 
 <body>
@@ -62,12 +58,12 @@ $p = $db->query("SELECT * FROM produits WHERE id = $id LIMIT 1")->fetch();
 
 
             <div class="row">
-                <div class="col">
+                <div class="col" data-aos="fade-right" data-aos-duration="1500">
                     <img src="images/produits/<?= $p['image'] ?>" class="img-fluid" alt="">
                 </div>
                 <!-- col -->
 
-                <div class="col">
+                <div class="col" data-aos="fade-left" data-aos-duration="1500">
                     <h5><?= strtoupper($p['nom']) ?></h5>
 
                     <div class="text-warning">
@@ -137,10 +133,8 @@ $p = $db->query("SELECT * FROM produits WHERE id = $id LIMIT 1")->fetch();
         <footer>
             <!-- place footer here -->
         </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <?php include_once "body/script.php"; ?>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
 
 </html>
